@@ -308,16 +308,27 @@ const STATIC_DEMO_ANSWERS: Record<string, { zh: string; en: string; records: { i
 function makeStaticDemoJob(item: DemoCase, language: Language): Job {
   const answer = STATIC_DEMO_ANSWERS[item.id] || STATIC_DEMO_ANSWERS.geomm_000362_change;
   const now = new Date().toISOString();
-  const records: EvidenceRecord[] = answer.records.map((record) => ({
+  
+  // Create artifacts for each evidence record - use the case image as placeholder
+  const records: EvidenceRecord[] = answer.records.map((record, index) => ({
     evidence_id: record.id,
     tool_name: record.tool,
     action_name: record.tool,
     summary: language === "en" ? record.en : record.zh,
     is_error: false,
-    artifacts: [],
+    artifacts: item.image ? [
+      {
+        ...item.image,
+        name: `${record.id}_result.png`,
+        path: item.image.path,
+        relative_path: item.image.relative_path,
+        kind: "evidence_output"
+      }
+    ] : [],
     inputs: item.image ? [item.image] : [],
     warnings: []
   }));
+  
   return {
     id: `static_demo_${item.id}`,
     kind: "agent",
@@ -1592,14 +1603,48 @@ export default function App() {
     if (running) return;
     const staticCase = demoCases.find((item) => item.id === caseId);
     if (offlineDemo && staticCase) {
-      const job = makeStaticDemoJob(staticCase, language);
+      // Simulate running with progress animation
       setSelectedCaseId(caseId);
-      setCurrentJob(job);
       setRequest(casePrompt(staticCase, language));
       setSelectedEvidenceId("");
       setEvidenceWorkspaceOpen(false);
       setPrimaryPath(staticCase.image ? bestPath(staticCase.image) : "");
       setNotice("");
+      
+      // Show running state
+      const runningJob: Job = {
+        id: `static_demo_${caseId}`,
+        kind: "agent",
+        title: caseTitle(staticCase, language),
+        status: "running",
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        return_code: null,
+        logs: [language === "en" ? "Analyzing remote sensing data..." : "正在分析遥感数据..."],
+        result: null,
+        artifacts: [],
+        evidence: null,
+        output_dir: null,
+        error: null,
+        command: []
+      };
+      setCurrentJob(runningJob);
+      
+      // Simulate progress over 3 seconds
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setCurrentJob({
+        ...runningJob,
+        logs: [
+          ...(runningJob.logs || []),
+          language === "en" ? "Extracting evidence..." : "正在提取证据..."
+        ]
+      });
+      
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Show final result
+      const job = makeStaticDemoJob(staticCase, language);
+      setCurrentJob(job);
       return;
     }
     setSubmitting(true);
