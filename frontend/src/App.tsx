@@ -463,6 +463,7 @@ type ToolName =
   | "route-intent";
 
 const terminalStates = new Set<JobStatus>(["succeeded", "failed", "cancelled"]);
+const STATIC_DEMO_MODE = import.meta.env.VITE_STATIC_DEMO === "true";
 
 async function api<T>(path: string, options?: RequestInit): Promise<T> {
   const response = await fetch(path, {
@@ -1316,9 +1317,9 @@ export default function App() {
   const [workbenchOpen, setWorkbenchOpen] = useState(false);
   const [filter, setFilter] = useState("all");
   const [caseView, setCaseView] = useState<"grid" | "list">("grid");
-  const [casesLoading, setCasesLoading] = useState(true);
+  const [casesLoading, setCasesLoading] = useState(!STATIC_DEMO_MODE);
   const [submitting, setSubmitting] = useState(false);
-  const [offlineDemo, setOfflineDemo] = useState(false);
+  const [offlineDemo, setOfflineDemo] = useState(STATIC_DEMO_MODE);
   const [citationCopied, setCitationCopied] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const workbenchRef = useRef<HTMLElement>(null);
@@ -1329,7 +1330,7 @@ export default function App() {
   const [toolConcurrency, setToolConcurrency] = useState(4);
   const [currentJob, setCurrentJob] = useState<Job | null>(null);
   const [uploads, setUploads] = useState<UploadItem[]>([]);
-  const [demoCases, setDemoCases] = useState<DemoCase[]>([]);
+  const [demoCases, setDemoCases] = useState<DemoCase[]>(STATIC_DEMO_MODE ? FALLBACK_DEMO_CASES : []);
   const [selectedCaseId, setSelectedCaseId] = useState("");
   const [notice, setNotice] = useState("");
   const [busyUpload, setBusyUpload] = useState(false);
@@ -1403,12 +1404,12 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (!currentJob || terminalStates.has(currentJob.status)) return;
+    if (offlineDemo || !currentJob || currentJob.id.startsWith("static_demo_") || terminalStates.has(currentJob.status)) return;
     const timer = window.setInterval(() => {
       void loadJob(currentJob.id);
     }, 1200);
     return () => window.clearInterval(timer);
-  }, [currentJob?.id, currentJob?.status]);
+  }, [offlineDemo, currentJob?.id, currentJob?.status]);
 
   useEffect(() => {
     if (records.length && !records.some((record) => record.evidence_id === selectedEvidenceId)) {
@@ -1431,6 +1432,11 @@ export default function App() {
       setEvidencePreviewLoading(false);
       return;
     }
+    if (offlineDemo) {
+      setEvidencePreview({ artifact: selectedArtifact, kind: selectedArtifact.is_image ? "image" : "binary" });
+      setEvidencePreviewLoading(false);
+      return;
+    }
     let cancelled = false;
     setEvidencePreviewLoading(true);
     api<Preview>(`/api/previews?path=${encodeURIComponent(selectedArtifact.path)}`)
@@ -1446,7 +1452,7 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, [selectedArtifact?.path]);
+  }, [offlineDemo, selectedArtifact?.path, selectedArtifact?.url, selectedArtifact?.is_image]);
 
   useEffect(() => {
     if (!evidenceWorkspaceOpen) return;
@@ -1552,16 +1558,23 @@ export default function App() {
 
   // Reload current job when language changes
   useEffect(() => {
-    if (offlineDemo && currentJob && selectedCaseId) {
+    if (offlineDemo && currentJob?.status === "succeeded" && currentJob.id.startsWith("static_demo_") && selectedCaseId) {
       const staticCase = demoCases.find((item) => item.id === selectedCaseId);
       if (staticCase) {
         const job = makeStaticDemoJob(staticCase, language);
         setCurrentJob(job);
       }
     }
-  }, [language, offlineDemo, selectedCaseId, demoCases]);
+  }, [language, offlineDemo, selectedCaseId, demoCases, currentJob?.id, currentJob?.status]);
 
   async function refreshShellData() {
+    if (STATIC_DEMO_MODE) {
+      setDemoCases(FALLBACK_DEMO_CASES);
+      setOfflineDemo(true);
+      setNotice("");
+      setCasesLoading(false);
+      return;
+    }
     setCasesLoading(true);
     try {
       const data = await api<{ cases: DemoCase[] }>("/api/demo-cases");
@@ -1576,6 +1589,7 @@ export default function App() {
   }
 
   async function loadJob(jobId: string) {
+    if (offlineDemo || jobId.startsWith("static_demo_")) return;
     try {
       const job = await api<Job>(`/api/jobs/${jobId}`);
       setCurrentJob(job);
@@ -1621,9 +1635,7 @@ export default function App() {
         updated_at: new Date().toISOString(),
         return_code: null,
         logs: [language === "en" ? "Analyzing remote sensing data..." : "正在分析遥感数据..."],
-        result: null,
         artifacts: [],
-        evidence: null,
         output_dir: null,
         error: null,
         command: []
