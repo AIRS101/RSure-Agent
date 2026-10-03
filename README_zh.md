@@ -4,7 +4,7 @@
 
 **RSure-Agent：遥感智能体对工具观测的可靠利用**
 
-[项目网站](https://airs101.github.io/RSure-Agent/)
+[项目网站](https://airs101.github.io/RSure-Agent/?lang=zh) · [演示视频](https://airs101.github.io/RSure-Agent/demo/?lang=zh)
 
 RSure-Agent 是一个遥感智能体，通过核验工具观测，减少错误在后续推理中的传播。
 

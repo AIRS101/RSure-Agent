@@ -30,7 +30,6 @@ jobs:
         working-directory: frontend
         env:
           GITHUB_ACTIONS: true
-          VITE_STATIC_DEMO: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: frontend/dist

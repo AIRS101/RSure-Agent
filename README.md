@@ -4,7 +4,7 @@
 
 **RSure-Agent: Reliable Use of Tool Observations for Remote Sensing Agents**
 
-[Project website](https://airs101.github.io/RSure-Agent/)
+[Project website](https://airs101.github.io/RSure-Agent/) · [Demo videos](https://airs101.github.io/RSure-Agent/demo/)
 
 RSure-Agent is a remote sensing agent that verifies tool observations to reduce error propagation in subsequent reasoning.
 
