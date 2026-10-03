@@ -1,6 +1,6 @@
 # RSure-Agent
 
-[切换至英文](README.md)
+[English](README.md) | **中文**
 
 **RSure-Agent：遥感智能体对工具观测的可靠利用**
 

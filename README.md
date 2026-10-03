@@ -1,6 +1,6 @@
 # RSure-Agent
 
-[中文](README_zh.md)
+**English** | [中文](README_zh.md)
 
 **RSure-Agent: Reliable Use of Tool Observations for Remote Sensing Agents**
 
