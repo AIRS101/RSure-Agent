@@ -1,43 +1,33 @@
 # RSure-Agent
 
-[English](#english) | [中文](#中文)
+[中文](README_zh.md)
 
-## 🎬 Demo Video / 演示视频
+**RSure-Agent: Reliable Use of Tool Observations for Remote Sensing Agents**
 
-[![Animated preview of three RSure-Agent cases / RSure-Agent 三个案例的动态预览](demo-videos/rsure-agent-demo-preview.gif)](https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4)
+[Project website](https://airs101.github.io/RSure-Agent/)
 
-**[▶ Watch the full demo (~72 seconds) / 观看完整演示（约 72 秒）](https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4)**
+RSure-Agent is a remote sensing agent that verifies tool observations to reduce error propagation in subsequent reasoning.
 
-Land-cover change analysis → object identification and detection → scale-based distance measurement. Click the animated preview to open the complete MP4 video.
+## Demo Video
 
-土地覆盖变化检测 → 目标识别与检测 → 比例尺测距。上方为动态预览，点击查看完整 MP4 视频。
+[![Animated preview of three RSure-Agent cases](demo-videos/rsure-agent-demo-preview.gif)](https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4)
 
-## English
+**[Watch the full demo (~72 seconds)](https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4)**
 
-RSure-Agent paper demonstration - Showcasing a reliable remote sensing agent system with evidence chains
+The animated preview shows highlights from the three cases. Click it to open the complete MP4 video.
 
-### 🌐 Live Demo
+- [Land-cover change analysis](demo-videos/rsure-agent-demo-change-detection.mp4): segmentation overlays and quantitative evidence from two time points.
+- [Object identification and detection](demo-videos/rsure-agent-demo-object-detection.mp4): visual recognition and detection evidence for a storage tank.
+- [Scale-based distance measurement](demo-videos/rsure-agent-demo-scale-measurement.mp4): map-scale and measurement evidence for the distance between A and B.
 
-Visit the demo: [https://airs101.github.io/RSure-Agent/](https://airs101.github.io/RSure-Agent/)
+## Paper
 
-This demonstration includes three typical remote sensing analysis cases, showing how RSure-Agent completes complex analysis tasks through traceable evidence chains.
+Authors: Coming soon.
 
-### 📄 Paper
+### Abstract
 
-Paper information to be added
+Coming soon.
 
----
+### Citation
 
-## 中文
-
-RSure-Agent 论文演示网站 - 展示基于证据链的可靠遥感智能体系统
-
-### 🌐 在线演示
-
-访问演示页面：[https://airs101.github.io/RSure-Agent/](https://airs101.github.io/RSure-Agent/)
-
-本演示网站包含三个典型遥感分析案例，展示 RSure-Agent 如何通过可追溯的证据链完成复杂分析任务。
-
-### 📄 论文信息
-
-论文相关信息待补充
+Coming soon.
