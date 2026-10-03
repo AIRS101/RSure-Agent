@@ -12,7 +12,7 @@ RSure-Agent 是一个遥感智能体，通过核验工具观测，减少错误�
 
 [![RSure-Agent 三个案例的动态预览](demo-videos/rsure-agent-demo-preview.gif)](https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4)
 
-**[观看完整演示（约 72 秒）](https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4)**
+**[观看完整演示（约 63 秒）](https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4)**
 
 上方为三个案例的动态预览，点击即可查看完整演示视频。
 

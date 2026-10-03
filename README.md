@@ -12,7 +12,7 @@ RSure-Agent is a remote sensing agent that verifies tool observations to reduce 
 
 [![Animated preview of three RSure-Agent cases](demo-videos/rsure-agent-demo-preview.gif)](https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4)
 
-**[Watch the full demo (~72 seconds)](https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4)**
+**[Watch the full demo (~63 seconds)](https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4)**
 
 The animated preview shows highlights from the three cases. Click it to open the complete MP4 video.
 

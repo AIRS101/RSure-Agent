@@ -68,7 +68,7 @@ svg { flex-shrink: 0; }
 .demo-case h2 { margin: 12px 0 15px; font-size: 24px; line-height: 1.35; font-weight: 600; letter-spacing: -.035em; }
 .demo-case-copy > p:not(.eyebrow) { color: var(--muted); font-size: 14px; }
 .download-link { margin-top: 22px; }
-.demo-video { display: block; width: 100%; aspect-ratio: 2938 / 1632; border-radius: 9px; border: 1px solid #182536; background: #101112; }
+.demo-video { display: block; width: 100%; aspect-ratio: 2938 / 1664; border-radius: 9px; border: 1px solid #182536; background: #101112; }
 .back-link { margin-top: 26px; }
 
 @media (max-width: 800px) {

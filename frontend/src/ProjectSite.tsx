@@ -28,7 +28,7 @@ const cases = [
       zh: "识别红框内的储罐，查看视觉识别结果和目标检测框，了解最终答案所依据的工具证据。"
     },
     video: objectVideo,
-    duration: "0:21"
+    duration: "0:17"
   },
   {
     id: "scale-measurement",
@@ -38,7 +38,7 @@ const cases = [
       zh: "根据地图比例尺估算 A、B 两点间的实际距离，查看版面识别结果与距离量测证据。"
     },
     video: scaleVideo,
-    duration: "0:22"
+    duration: "0:23"
   }
 ];
 
@@ -75,7 +75,7 @@ export default function ProjectSite() {
             <p className="eyebrow">{t("RECORDED DEMONSTRATIONS", "案例演示")}</p>
             <h1>{t("Three scenarios. Traceable evidence.", "三个场景，可追溯的证据。")}</h1>
             <p className="intro-copy">{t("Watch the recorded analysis and tool evidence for each remote sensing scenario.", "通过演示视频查看每个遥感场景的分析过程与工具证据。")}</p>
-            <a className="inline-link" href={combinedVideo} target="_blank" rel="noreferrer"><Play size={15} />{t("Watch all three demos · 1:12", "观看三个案例合集 · 1:12")}<ArrowUpRight size={14} /></a>
+            <a className="inline-link" href={combinedVideo} target="_blank" rel="noreferrer"><Play size={15} />{t("Watch all three demos · 1:03", "观看三个案例合集 · 1:03")}<ArrowUpRight size={14} /></a>
           </section>
 
           <div className="demo-list">
