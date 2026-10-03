@@ -1539,6 +1539,17 @@ export default function App() {
     setLanguage(next);
   }
 
+  // Reload current job when language changes
+  useEffect(() => {
+    if (offlineDemo && currentJob && selectedCaseId) {
+      const staticCase = demoCases.find((item) => item.id === selectedCaseId);
+      if (staticCase) {
+        const job = makeStaticDemoJob(staticCase, language);
+        setCurrentJob(job);
+      }
+    }
+  }, [language, offlineDemo, selectedCaseId, demoCases]);
+
   async function refreshShellData() {
     setCasesLoading(true);
     try {
