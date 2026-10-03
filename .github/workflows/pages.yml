@@ -23,16 +23,16 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: webapp/frontend/package-lock.json
+          cache-dependency-path: frontend/package-lock.json
       - run: npm ci
-        working-directory: webapp/frontend
+        working-directory: frontend
       - run: npm run build
-        working-directory: webapp/frontend
+        working-directory: frontend
         env:
           GITHUB_ACTIONS: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: webapp/frontend/dist
+          path: frontend/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
