@@ -229,19 +229,19 @@ type DemoCase = {
 };
 
 
-function staticDemoArtifact(name: string): Artifact {
+function staticDemoArtifact(name: string, kind = "case_image", sizeBytes = 0): Artifact {
   const url = `${import.meta.env.BASE_URL}demo/${name}`;
   return {
-    name,
+    name: name.split("/").pop() || name,
     path: `demo/${name}`,
     relative_path: `demo/${name}`,
     url,
     extension: ".png",
     media_type: "image/png",
-    size_bytes: 0,
+    size_bytes: sizeBytes,
     modified_at: "",
     is_image: true,
-    kind: "case_image"
+    kind
   };
 }
 
@@ -253,7 +253,7 @@ const FALLBACK_DEMO_CASES: DemoCase[] = [
     task_type: "变化检测 / 土地覆盖",
     question: "请比较左右两个时相的遥感影像，说明主要土地覆盖变化，并给出可量化依据。",
     badge: "公开基准数据",
-    image: staticDemoArtifact("000362.png")
+    image: staticDemoArtifact("000362.png", "case_image", 170340)
   },
   {
     id: "geomm_000885",
@@ -262,7 +262,7 @@ const FALLBACK_DEMO_CASES: DemoCase[] = [
     task_type: "视觉问答 / 目标识别",
     question: "请判断遥感图像红色框中的目标是什么，并说明主要视觉依据。",
     badge: "公开基准数据",
-    image: staticDemoArtifact("000885.png")
+    image: staticDemoArtifact("000885.png", "case_image", 1457353)
   },
   {
     id: "geomm_000925",
@@ -271,18 +271,18 @@ const FALLBACK_DEMO_CASES: DemoCase[] = [
     task_type: "地图量测 / 比例尺",
     question: "请根据图中比例尺估算 A、B 两点间的实际距离，并说明量测依据。",
     badge: "公开基准数据",
-    image: staticDemoArtifact("000925.png")
+    image: staticDemoArtifact("000925.png", "case_image", 621461)
   }
 ];
 
-const STATIC_DEMO_ANSWERS: Record<string, { zh: string; en: string; records: { id: string; tool: string; zh: string; en: string }[] }> = {
+const STATIC_DEMO_ANSWERS: Record<string, { zh: string; en: string; records: { id: string; tool: string; zh: string; en: string; artifact?: Artifact }[] }> = {
   geomm_000362_change: {
     zh: "结论：左右两个时相之间最显著的变化是 **建筑用地显著增加**。\n\n分析：前后时相影像经过土地覆盖分割后，建筑区域在后时相中明显扩张 [E002]。定量结果进一步显示，`building` 占比从 **1.01%** 增至 **70.09%**，增加约 **69.07 个百分点**；与此同时，`background` 占比从 **63.86%** 降至 **0.74%** [E003]。",
     en: "Conclusion: The clearest change between the two time points is a substantial expansion of built-up area.\n\nAnalysis: Land-cover segmentation shows that the built-up region expanded clearly in the later image [E002]. The quantitative result shows `building` rising from **1.01%** to **70.09%**, an increase of about **69.07 percentage points**; meanwhile, `background` fell from **63.86%** to **0.74%** [E003].",
     records: [
       { id: "E001", tool: "rs_intent_router", zh: "识别为开放式土地覆盖变化检测任务，需要对比两个时相并量化类别变化。", en: "This is an open land-cover change detection task; compare and quantify the two time points." },
-      { id: "E002", tool: "rs_change_pair_segment", zh: "将左右两个时相拆分为 before / after，并分别生成土地覆盖语义分割结果。", en: "The two time points were separated into before / after images with semantic segmentation outputs for both." },
-      { id: "E003", tool: "rs_landcover_change_quantifier", zh: "building 类占比从 0.010146 增至 0.700886，background 类占比显著下降。", en: "The `building` share rose from 0.010146 to 0.700886 while the `background` share declined substantially." }
+      { id: "E002", tool: "rs_change_pair_segment", zh: "将左右两个时相拆分为 before / after，并分别生成土地覆盖语义分割结果。", en: "The two time points were separated into before / after images with semantic segmentation outputs for both.", artifact: staticDemoArtifact("evidence/000362_before_seg.png", "before_segmentation_overlay", 89106) },
+      { id: "E003", tool: "rs_landcover_change_quantifier", zh: "building 类占比从 0.010146 增至 0.700886，background 类占比显著下降。", en: "The `building` share rose from 0.010146 to 0.700886 while the `background` share declined substantially.", artifact: staticDemoArtifact("evidence/000362_after_seg.png", "after_segmentation_overlay", 111526) }
     ]
   },
   geomm_000885: {
@@ -291,7 +291,7 @@ const STATIC_DEMO_ANSWERS: Record<string, { zh: string; en: string; records: { i
     records: [
       { id: "E001", tool: "rs_intent_router", zh: "识别为开放式遥感目标识别任务，推荐视觉观察与目标检测交叉验证。", en: "This is an open remote-sensing object-identification task; visual inspection and object detection provide cross-checks." },
       { id: "E002", tool: "rs_vlm_qa", zh: "红框内目标具有大型圆形工业设施外观，形态和场景均符合储罐特征。", en: "The boxed target has the large circular form of an industrial facility, with shape and context consistent with a storage tank." },
-      { id: "E003", tool: "rs_object_detect", zh: "目标检测结果在相同位置识别出 storage tank。", en: "The object-detection result identifies a storage tank at the same location as the red box." }
+      { id: "E003", tool: "rs_object_detect", zh: "目标检测结果在相同位置识别出 storage tank。", en: "The object-detection result identifies a storage tank at the same location as the red box.", artifact: staticDemoArtifact("evidence/000885_detection.png", "object_detection_overlay", 1462180) }
     ]
   },
   geomm_000925: {
@@ -300,7 +300,7 @@ const STATIC_DEMO_ANSWERS: Record<string, { zh: string; en: string; records: { i
     records: [
       { id: "E001", tool: "rs_intent_router", zh: "识别为开放式地图比例尺距离测量任务。", en: "This is an open map scale and distance measurement task." },
       { id: "E002", tool: "rs_vlm_ocr_layout", zh: "OCR 与版面解析定位了 A、B 点和比例尺文字。", en: "OCR and layout parsing located points A and B and the scale text." },
-      { id: "E003", tool: "rs_scale_bar_distance", zh: "基于比例尺像素几何测得 A-B 距离约 280.214 m。", en: "Pixel geometry and the scale bar give an A–B distance of approximately 280.214 m." }
+      { id: "E003", tool: "rs_scale_bar_distance", zh: "基于比例尺像素几何测得 A-B 距离约 280.214 m。", en: "Pixel geometry and the scale bar give an A–B distance of approximately 280.214 m.", artifact: staticDemoArtifact("evidence/000925_scale.png", "scale_distance_overlay", 617830) }
     ]
   }
 };
@@ -308,27 +308,18 @@ const STATIC_DEMO_ANSWERS: Record<string, { zh: string; en: string; records: { i
 function makeStaticDemoJob(item: DemoCase, language: Language): Job {
   const answer = STATIC_DEMO_ANSWERS[item.id] || STATIC_DEMO_ANSWERS.geomm_000362_change;
   const now = new Date().toISOString();
-  
-  // Create artifacts for each evidence record - use the case image as placeholder
-  const records: EvidenceRecord[] = answer.records.map((record, index) => ({
+
+  const records: EvidenceRecord[] = answer.records.map((record) => ({
     evidence_id: record.id,
     tool_name: record.tool,
     action_name: record.tool,
     summary: language === "en" ? record.en : record.zh,
     is_error: false,
-    artifacts: item.image ? [
-      {
-        ...item.image,
-        name: `${record.id}_result.png`,
-        path: item.image.path,
-        relative_path: item.image.relative_path,
-        kind: "evidence_output"
-      }
-    ] : [],
+    artifacts: record.artifact ? [{ ...record.artifact, evidence_id: record.id }] : [],
     inputs: item.image ? [item.image] : [],
     warnings: []
   }));
-  
+
   return {
     id: `static_demo_${item.id}`,
     kind: "agent",
@@ -343,7 +334,7 @@ function makeStaticDemoJob(item: DemoCase, language: Language): Job {
       case: { dataset: item.dataset, case_id: item.id, image: item.image },
       evidence_index: { final_answer: language === "en" ? answer.en : answer.zh, record_count: records.length, records, case: { dataset: item.dataset, case_id: item.id, image: item.image } }
     },
-    artifacts: item.image ? [item.image] : [],
+    artifacts: dedupeArtifacts([...(item.image ? [item.image] : []), ...records.flatMap((record) => record.artifacts || [])]),
     evidence: { record_count: records.length },
     output_dir: null,
     error: null,
@@ -926,6 +917,9 @@ function citationDataLines(data: unknown, record: EvidenceRecord | null): string
 
 function cnArtifactLabel(artifact: Artifact): string {
   const kind = (artifact.kind || artifact.name || "").toLowerCase();
+  if (kind.includes("before_segmentation")) return "前时相分割叠加图";
+  if (kind.includes("after_segmentation")) return "后时相分割叠加图";
+  if (kind.includes("scale_distance_overlay")) return "测距标注图";
   if (kind.includes("preview")) return "预览图";
   if (kind.includes("mask") && artifact.is_image) return "水体掩膜";
   if (kind.includes("mask") && kind.includes("tif")) return "掩膜栅格";
@@ -945,6 +939,9 @@ function cnArtifactLabel(artifact: Artifact): string {
 
 function enArtifactLabel(artifact: Artifact): string {
   const kind = `${artifact.kind || ""} ${artifact.name || ""}`.toLowerCase();
+  if (kind.includes("before_segmentation")) return "Before segmentation overlay";
+  if (kind.includes("after_segmentation")) return "After segmentation overlay";
+  if (kind.includes("scale_distance_overlay")) return "Distance measurement overlay";
   if (kind.includes("preview")) return "Preview image";
   if (kind.includes("mask") && artifact.is_image) return "Water mask";
   if (kind.includes("mask") && kind.includes("tif")) return "Mask raster";
@@ -1359,12 +1356,15 @@ export default function App() {
   }, [records, selectedEvidenceId]);
   const selectedEvidenceArtifacts = useMemo(() => {
     if (!selectedEvidence) return [];
+    if (offlineDemo) {
+      return dedupeArtifacts([...evidenceArtifacts(selectedEvidence), ...recordInputImages(selectedEvidence)]);
+    }
     return dedupeArtifacts([
       ...citationImageArtifacts(selectedEvidence, records),
       ...evidenceArtifacts(selectedEvidence),
       ...(citationDataArtifact(selectedEvidence, records) ? [citationDataArtifact(selectedEvidence, records)!] : [])
     ]);
-  }, [selectedEvidence, records]);
+  }, [selectedEvidence, records, offlineDemo]);
   const selectedArtifact = useMemo(() => {
     return (
       selectedEvidenceArtifacts.find((artifact) => artifact.path === selectedArtifactPath) ||
@@ -1791,6 +1791,7 @@ export default function App() {
   function openEvidenceWorkspace(evidenceId: string) {
     if (!records.some((record) => record.evidence_id === evidenceId)) return;
     setSelectedEvidenceId(evidenceId);
+    setSelectedArtifactPath("");
     setEvidenceWorkspaceOpen(true);
   }
 
@@ -1953,7 +1954,7 @@ export default function App() {
                 {notice && <div className="notice" role="alert"><AlertCircle size={16}/><span>{notice}</span></div>}
                 {currentJob || submitting ? <RunProgress job={currentJob} events={runEvents} eventLogs={eventLogs} language={language}/> : null}
                 {selectedResult ? <><AnswerWithCitations text={selectedResult} records={records} onSelect={openEvidenceWorkspace} language={language}/>
-                  {!!records.length && <button className="evidence-entry" type="button" onClick={() => openEvidenceWorkspace(records[0].evidence_id || "")}><ShieldCheck size={17}/><span>{t(`查看 ${records.length} 条证据`, `Inspect ${records.length} evidence records`)}</span><ArrowRight size={17}/></button>}
+                  {!!records.length && <button className="evidence-entry" type="button" onClick={() => openEvidenceWorkspace(selectedEvidence?.evidence_id || records[0].evidence_id || "")}><ShieldCheck size={17}/><span>{t(`查看 ${records.length} 条证据`, `Inspect ${records.length} evidence records`)}</span><ArrowRight size={17}/></button>}
                   <p className="source-language-note">{t("报告与原始产物保留生成时的语言。", "Reports and artifacts retain their original language.")}</p></> : <div className="workspace-empty-state"><div className="empty-orbit"><Satellite size={27} strokeWidth={1.2}/></div><h4>{t("让影像回答你的问题。", "Let the imagery tell its story.")}</h4><p>{running ? t("正在收集工具结果与证据。", "Collecting tool results and evidence.") : t("选择案例回放，或上传影像并描述问题。\n分析完成后，在这里追溯每一条证据。", "Replay a case, or upload imagery and ask a question.\nYour analysis and supporting evidence appear here.")}</p><div className="workflow-legend"><span>01 {t("观察", "Observe")}</span><i/><span>02 {t("分析", "Analyze")}</span><i/><span>03 {t("核验", "Verify")}</span></div></div>}
               </section>
             </div>
