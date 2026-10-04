@@ -9,14 +9,27 @@
 </p>
 
 <p align="center">
-  <a href="https://airs101.github.io/RSure-Agent/"><img src="assets/readme/website-en.svg" alt="Project website" width="176" height="40" /></a>
+  <a href="https://github.com/AIRS101/RSure-Agent"><img src="https://img.shields.io/badge/GitHub-RSure--Agent-315ecc?logo=github&amp;logoColor=white" alt="GitHub repository" /></a>
   &nbsp;
-  <a href="https://airs101.github.io/RSure-Agent/demo/"><img src="assets/readme/demos-en.svg" alt="Demo videos" width="152" height="40" /></a>
+  <a href="https://airs101.github.io/RSure-Agent/"><img src="https://img.shields.io/badge/Website-Project_Page-315ecc" alt="Project website" /></a>
+  &nbsp;
+  <a href="https://airs101.github.io/RSure-Agent/demo/"><img src="https://img.shields.io/badge/Demo-Videos-315ecc" alt="Demo videos" /></a>
 </p>
 
 <p align="center">
   RSure-Agent is a remote sensing agent that verifies tool observations to reduce error propagation in subsequent reasoning.
 </p>
+
+## Release Plan
+
+RSure-Agent materials will be released in stages. Release progress will be updated in this repository.
+
+- [x] Publish the project website and English and Chinese READMEs.
+- [x] Publish English and Chinese demo videos and compilations for change detection, object identification, and scale-based distance measurement.
+- [ ] Add paper information, a method overview figure, and citation information.
+- [ ] Release the RSure-Agent core code, including tool-calling and observation-verification modules.
+- [ ] Provide environment setup, installation instructions, and guides for running example cases.
+- [ ] Release evaluation scripts, experiment configurations, and reproduction documentation.
 
 ## Demo Video
 
