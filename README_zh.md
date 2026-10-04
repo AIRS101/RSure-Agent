@@ -21,11 +21,11 @@
 ## 演示视频
 
 <p align="center">
-  <a href="https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4"><img src="demo-videos/rsure-agent-demo-preview.gif" alt="RSure-Agent 三个案例的动态预览" width="900" /></a>
+  <a href="https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/zh/rsure-agent-demo-combined-zh.mp4"><img src="demo-videos/zh/rsure-agent-demo-preview-zh.gif" alt="RSure-Agent 三个案例的动态预览" width="900" /></a>
 </p>
 
 <p align="center">
-  <strong><a href="https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4">观看完整演示（约 63 秒）</a></strong>
+  <strong><a href="https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/zh/rsure-agent-demo-combined-zh.mp4">观看完整演示（约 57 秒）</a></strong>
 </p>
 
 <p align="center">
@@ -34,9 +34,9 @@
 
 | 场景 | 演示内容 |
 | --- | --- |
-| [土地覆盖变化检测](demo-videos/rsure-agent-demo-change-detection.mp4) | 查看两个时相的分割叠加图与定量证据。 |
-| [目标识别与检测](demo-videos/rsure-agent-demo-object-detection.mp4) | 查看储罐的视觉识别与目标检测证据。 |
-| [比例尺测距](demo-videos/rsure-agent-demo-scale-measurement.mp4) | 查看 A、B 两点间距离的比例尺与量测证据。 |
+| [土地覆盖变化检测](demo-videos/zh/rsure-agent-demo-change-detection-zh.mp4) | 查看两个时相的分割叠加图与定量证据。 |
+| [目标识别与检测](demo-videos/zh/rsure-agent-demo-object-detection-zh.mp4) | 查看储罐的视觉识别与目标检测证据。 |
+| [比例尺测距](demo-videos/zh/rsure-agent-demo-scale-measurement-zh.mp4) | 查看 A、B 两点间距离的比例尺与量测证据。 |
 
 ## 论文
 

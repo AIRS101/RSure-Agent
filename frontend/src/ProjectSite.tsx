@@ -4,10 +4,18 @@ import changeVideo from "../../demo-videos/rsure-agent-demo-change-detection.mp4
 import objectVideo from "../../demo-videos/rsure-agent-demo-object-detection.mp4?url";
 import scaleVideo from "../../demo-videos/rsure-agent-demo-scale-measurement.mp4?url";
 import combinedVideo from "../../demo-videos/rsure-agent-demo-combined.mp4?url";
+import changeVideoZh from "../../demo-videos/zh/rsure-agent-demo-change-detection-zh.mp4?url";
+import objectVideoZh from "../../demo-videos/zh/rsure-agent-demo-object-detection-zh.mp4?url";
+import scaleVideoZh from "../../demo-videos/zh/rsure-agent-demo-scale-measurement-zh.mp4?url";
+import combinedVideoZh from "../../demo-videos/zh/rsure-agent-demo-combined-zh.mp4?url";
 
 const BASE_URL = import.meta.env.BASE_URL;
 const REPOSITORY_URL = "https://github.com/AIRS101/RSure-Agent";
 const PAPER_TITLE = "Reliable Use of Tool Observations for Remote Sensing Agents";
+const combinedDemos = {
+  en: { video: combinedVideo, duration: "1:03" },
+  zh: { video: combinedVideoZh, duration: "0:57" }
+};
 
 const cases = [
   {
@@ -17,8 +25,8 @@ const cases = [
       en: "Compare two time points and inspect the segmentation overlays and quantitative evidence behind the land-cover change analysis.",
       zh: "对比两个时相的遥感影像，查看土地覆盖分割叠加图，以及支持变化判断的定量证据。"
     },
-    video: changeVideo,
-    duration: "0:22"
+    video: { en: changeVideo, zh: changeVideoZh },
+    duration: { en: "0:22", zh: "0:21" }
   },
   {
     id: "object-detection",
@@ -27,8 +35,8 @@ const cases = [
       en: "Identify the storage tank inside the red box and follow the visual recognition and object-detection evidence used in the answer.",
       zh: "识别红框内的储罐，查看视觉识别结果和目标检测框，了解最终答案所依据的工具证据。"
     },
-    video: objectVideo,
-    duration: "0:17"
+    video: { en: objectVideo, zh: objectVideoZh },
+    duration: { en: "0:17", zh: "0:19" }
   },
   {
     id: "scale-measurement",
@@ -37,8 +45,8 @@ const cases = [
       en: "Estimate the distance between A and B using the map scale, and inspect the layout and measurement evidence.",
       zh: "根据地图比例尺估算 A、B 两点间的实际距离，查看版面识别结果与距离量测证据。"
     },
-    video: scaleVideo,
-    duration: "0:23"
+    video: { en: scaleVideo, zh: scaleVideoZh },
+    duration: { en: "0:23", zh: "0:17" }
   }
 ];
 
@@ -48,6 +56,7 @@ export default function ProjectSite() {
   const t = (en: string, zh: string) => language === "en" ? en : zh;
   const paperTitle = t(PAPER_TITLE, "遥感智能体对工具观测的可靠利用");
   const comingSoon = t("Coming soon.", "敬请期待。");
+  const combinedDemo = combinedDemos[language];
   const pageUrl = (demo: boolean, lang = language) => `${BASE_URL}${demo ? "demo/" : ""}${lang === "zh" ? "?lang=zh" : ""}`;
 
   useEffect(() => {
@@ -75,24 +84,24 @@ export default function ProjectSite() {
             <p className="eyebrow">{t("RECORDED DEMONSTRATIONS", "案例演示")}</p>
             <h1>{t("Three scenarios. Traceable evidence.", "三个场景，可追溯的证据。")}</h1>
             <p className="intro-copy">{t("Watch the recorded analysis and tool evidence for each remote sensing scenario.", "通过演示视频查看每个遥感场景的分析过程与工具证据。")}</p>
-            <a className="inline-link" href={combinedVideo} target="_blank" rel="noreferrer"><Play size={15} />{t("Watch all three demos · 1:03", "观看三个案例合集 · 1:03")}<ArrowUpRight size={14} /></a>
+            <a className="inline-link" href={combinedDemo.video} target="_blank" rel="noreferrer"><Play size={15} />{t("Watch all three demos", "观看三个案例合集")} · {combinedDemo.duration}<ArrowUpRight size={14} /></a>
           </section>
 
           <div className="demo-list">
             {cases.map((item, index) => (
               <article className="demo-case" id={item.id} key={item.id} aria-labelledby={`${item.id}-title`}>
                 <div className="demo-case-copy">
-                  <p className="eyebrow">{t("CASE", "案例")} {String(index + 1).padStart(2, "0")} <span className="duration">{item.duration}</span></p>
+                  <p className="eyebrow">{t("CASE", "案例")} {String(index + 1).padStart(2, "0")} <span className="duration">{item.duration[language]}</span></p>
                   <h2 id={`${item.id}-title`}>{item.title[language]}</h2>
                   <p>{item.description[language]}</p>
-                  <a className="inline-link download-link" href={item.video} download={`rsure-agent-demo-${item.id}.mp4`}><Download size={14} />{t("Download video", "下载视频")}</a>
+                  <a className="inline-link download-link" href={item.video[language]} download={`rsure-agent-demo-${item.id}${language === "zh" ? "-zh" : ""}.mp4`}><Download size={14} />{t("Download video", "下载视频")}</a>
                 </div>
                 <video
                   className="demo-video"
                   controls
                   playsInline
                   preload="none"
-                  poster={`${BASE_URL}demo/video-posters/${item.id}.png`}
+                  poster={`${BASE_URL}demo/video-posters/${language === "zh" ? "zh/" : ""}${item.id}.png`}
                   aria-label={item.title[language]}
                   onPlay={(event) => {
                     document.querySelectorAll("video").forEach((video) => {
@@ -100,8 +109,8 @@ export default function ProjectSite() {
                     });
                   }}
                 >
-                  <source src={item.video} type="video/mp4" />
-                  <a href={item.video}>{t("Download this demo video", "下载此演示视频")}</a>
+                  <source src={item.video[language]} type="video/mp4" />
+                  <a href={item.video[language]}>{t("Download this demo video", "下载此演示视频")}</a>
                 </video>
               </article>
             ))}
