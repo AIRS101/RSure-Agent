@@ -17,6 +17,12 @@
 </p>
 
 <p align="center">
+  <a href="https://airs101.github.io/RSure-Agent/"><img src="assets/readme/website-en.svg" alt="Open project website" width="211" height="48" /></a>
+  &nbsp;
+  <a href="https://airs101.github.io/RSure-Agent/demo/"><img src="assets/readme/demos-en.svg" alt="Watch demo videos" width="182" height="48" /></a>
+</p>
+
+<p align="center">
   RSure-Agent is a remote sensing agent that verifies tool observations to reduce error propagation in subsequent reasoning.
 </p>
 

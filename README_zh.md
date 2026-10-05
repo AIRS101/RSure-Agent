@@ -17,6 +17,12 @@
 </p>
 
 <p align="center">
+  <a href="https://airs101.github.io/RSure-Agent/?lang=zh"><img src="assets/readme/website-zh.svg" alt="访问项目网站" width="154" height="48" /></a>
+  &nbsp;
+  <a href="https://airs101.github.io/RSure-Agent/demo/?lang=zh"><img src="assets/readme/demos-zh.svg" alt="观看演示视频" width="154" height="48" /></a>
+</p>
+
+<p align="center">
   RSure-Agent 是一个遥感智能体，通过核验工具观测，减少错误在后续推理中的传播。
 </p>
 
