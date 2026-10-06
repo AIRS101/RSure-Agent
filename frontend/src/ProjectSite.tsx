@@ -141,7 +141,12 @@ export default function ProjectSite() {
           <div className="paper-content">
             <section className="paper-section" aria-labelledby="abstract-title">
               <h2 id="abstract-title">{t("Abstract", "摘要")}</h2>
-              <p>{paper.abstract[language]}</p>
+              <p>
+                {paper.abstract[language]}{" "}
+                {t("The project is available at ", "项目地址为 ")}
+                <a href={REPOSITORY_URL} target="_blank" rel="noreferrer">{REPOSITORY_URL}</a>
+                {t(".", "。")}
+              </p>
             </section>
             <section className="paper-section" aria-labelledby="paper-link-title">
               <h2 id="paper-link-title">{t("Paper", "论文")}</h2>
