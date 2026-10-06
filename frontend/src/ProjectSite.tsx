@@ -1,5 +1,7 @@
-import { ArrowRight, ArrowUpRight, Download, Play } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Download, FileText, Play } from "lucide-react";
 import { useEffect } from "react";
+import citation from "../../CITATION.bib?raw";
+import { paper } from "./paper";
 import changeVideo from "../../demo-videos/rsure-agent-demo-change-detection.mp4?url";
 import objectVideo from "../../demo-videos/rsure-agent-demo-object-detection.mp4?url";
 import scaleVideo from "../../demo-videos/rsure-agent-demo-scale-measurement.mp4?url";
@@ -11,7 +13,7 @@ import combinedVideoZh from "../../demo-videos/zh/rsure-agent-demo-combined-zh.m
 
 const BASE_URL = import.meta.env.BASE_URL;
 const REPOSITORY_URL = "https://github.com/AIRS101/RSure-Agent";
-const PAPER_TITLE = "Reliable Use of Tool Observations for Remote Sensing Agents";
+const PAPER_TITLE = paper.title.replace("RSure-Agent: ", "");
 const combinedDemos = {
   en: { video: combinedVideo, duration: "1:03" },
   zh: { video: combinedVideoZh, duration: "0:57" }
@@ -55,7 +57,6 @@ export default function ProjectSite() {
   const isDemoPage = window.location.pathname.replace(/\/$/, "").endsWith("/demo");
   const t = (en: string, zh: string) => language === "en" ? en : zh;
   const paperTitle = t(PAPER_TITLE, "遥感智能体对工具观测的可靠利用");
-  const comingSoon = t("Coming soon.", "敬请期待。");
   const combinedDemo = combinedDemos[language];
   const pageUrl = (demo: boolean, lang = language) => `${BASE_URL}${demo ? "demo/" : ""}${lang === "zh" ? "?lang=zh" : ""}`;
 
@@ -122,25 +123,36 @@ export default function ProjectSite() {
           <section className="paper-intro" aria-labelledby="paper-title">
             <p className="eyebrow">{t("RESEARCH PROJECT", "研究项目")}</p>
             <h1 id="paper-title">RSure-Agent<span>{paperTitle}</span></h1>
-            <p className="authors">{t("Authors", "作者")}: <span>{comingSoon}</span></p>
+            <p className="authors">{paper.authors.join(", ")}</p>
             <div className="paper-actions">
               <a className="primary-link" href={pageUrl(true)}><Play size={16} />{t("View demos", "查看演示")}</a>
+              <a className="secondary-link" href={paper.arxivUrl} target="_blank" rel="noreferrer"><FileText size={16} />{t("Read paper", "阅读论文")}</a>
               <a className="secondary-link" href={REPOSITORY_URL} target="_blank" rel="noreferrer">GitHub<ArrowUpRight size={16} /></a>
             </div>
           </section>
 
+          <figure className="paper-figure">
+            <a href={`${BASE_URL}paper/overview.png`} target="_blank" rel="noreferrer">
+              <img src={`${BASE_URL}paper/overview.png`} alt={t("Illustration of RSure-Agent from Figure 1 of the paper", "RSure-Agent 论文图 1：工具观测核验示意图")} width="2192" height="975" />
+            </a>
+            <figcaption>{t("Figure 1. RSure-Agent verifies tool observations before using them in subsequent reasoning.", "图 1：RSure-Agent 在使用工具观测进行后续推理前对其进行核验。")}</figcaption>
+          </figure>
+
           <div className="paper-content">
             <section className="paper-section" aria-labelledby="abstract-title">
               <h2 id="abstract-title">{t("Abstract", "摘要")}</h2>
-              <p className="coming-soon">{comingSoon}</p>
+              <p>{paper.abstract[language]}</p>
             </section>
             <section className="paper-section" aria-labelledby="paper-link-title">
               <h2 id="paper-link-title">{t("Paper", "论文")}</h2>
-              <p className="coming-soon">{comingSoon}</p>
+              <div className="paper-links">
+                <a className="inline-link" href={paper.arxivUrl} target="_blank" rel="noreferrer">arXiv:2610.04836<ArrowUpRight size={14} /></a>
+                <a className="inline-link" href={paper.pdfUrl} target="_blank" rel="noreferrer"><FileText size={14} />{t("Read PDF", "阅读 PDF")}</a>
+              </div>
             </section>
             <section className="paper-section" aria-labelledby="citation-title">
               <h2 id="citation-title">{t("Citation", "引用")}</h2>
-              <div className="citation-placeholder">{comingSoon}</div>
+              <pre className="citation-block"><code>{citation.trim()}</code></pre>
             </section>
           </div>
         </main>

@@ -9,6 +9,8 @@
 </p>
 
 <p align="center">
+  <a href="https://arxiv.org/abs/2610.04836"><img src="https://img.shields.io/badge/arXiv-2610.04836-b31b1b" alt="arXiv: 2610.04836" /></a>
+  &nbsp;
   <a href="https://github.com/AIRS101/RSure-Agent"><img src="https://img.shields.io/badge/GitHub-RSure--Agent-315ecc?logo=github&amp;logoColor=white" alt="GitHub 仓库" /></a>
   &nbsp;
   <a href="https://airs101.github.io/RSure-Agent/?lang=zh"><img src="https://img.shields.io/badge/%E9%A1%B9%E7%9B%AE%E7%BD%91%E7%AB%99-%E8%AE%BF%E9%97%AE%E4%B8%BB%E9%A1%B5-315ecc" alt="项目网站" /></a>
@@ -26,13 +28,19 @@
   RSure-Agent 是一个遥感智能体，通过核验工具观测，减少错误在后续推理中的传播。
 </p>
 
+<p align="center">
+  <a href="https://arxiv.org/pdf/2610.04836#page=1"><img src="frontend/public/paper/overview.png" alt="RSure-Agent 论文图 1：工具观测核验示意图" width="900" /></a>
+</p>
+
+<p align="center"><em>图 1：RSure-Agent 在使用工具观测进行后续推理前对其进行核验。</em></p>
+
 ## 发布计划
 
 RSure-Agent 的相关材料将分阶段发布，发布进展将在本仓库更新。
 
 - [x] 发布项目展示网站与中英文 README。
 - [x] 发布变化检测、目标识别与比例尺测距的中英文演示视频及合集。
-- [ ] 补充论文信息、方法框架图与引用格式。
+- [x] 补充论文信息、论文示意图与引用格式。
 - [ ] 开源 RSure-Agent 核心代码，包括工具调用与观测核验模块。
 - [ ] 提供环境配置、安装说明与示例案例运行指南。
 - [ ] 发布实验评测脚本、运行配置与复现文档。
@@ -59,12 +67,28 @@ RSure-Agent 的相关材料将分阶段发布，发布进展将在本仓库更�
 
 ## 论文
 
-作者：敬请期待。
+**[RSure-Agent：遥感智能体对工具观测的可靠利用](https://arxiv.org/abs/2610.04836)**
+
+作者：Fuyuan Liu、Nayu Liu、Wenhao Yu、Peijin Wang、Yingchao Feng、Fanglong Yao、Liang Wan、Wei Feng。
+
+[arXiv](https://arxiv.org/abs/2610.04836) · [PDF](https://arxiv.org/pdf/2610.04836) · [BibTeX](CITATION.bib)
 
 ### 摘要
 
-敬请期待。
+遥感智能体依赖感知、量测和栅格分析工具来解决地球观测任务。我们将这些工具针对地物给出的判断和定量结果称为工具观测。然而，这些观测存在显著不确定性，即使工具成功执行，也可能出现错误。智能体一旦接受错误观测，错误便可能沿后续推理传播，导致任务失败。我们分析了三个遥感智能体基准上的 1,229 条执行轨迹。在每个基准上，至少 88.1% 的任务依赖工具观测；其中，至少 22.7% 的任务在工具成功执行的情况下仍包含错误观测。这些错误在每个基准中至少 82.0% 的受影响任务里传播到了最终答案。为解决这一问题，我们提出 RSure-Agent，一种用于核验工具观测并限制错误传播的框架。我们设计了可核验观测协议，要求工具返回过程证据，以便智能体核验其观测。我们还基于离线任务反馈构建了任务—工具可靠性先验。该先验总结不同工具配置在各类任务上的历史表现，为核验提供与当前任务相关的参考。结合过程证据和可靠性先验，RSure-Agent 决定接受观测、请求补充证据或拒绝观测。我们在 EarthBench、ThinkGeo、TerraLogic 和 CHOICE-420 上评估了 RSure-Agent。与关闭核验和先验的基础配置相比，RSure-Agent 在三个智能体基准上将错误传播率降低了 21.3 至 25.9 个百分点。在 CHOICE-420 上，相较于直接作答，11 个骨干模型的总体准确率平均提高了 5.71 个百分点。在 EarthBench 上，相较于 Earth-Agent，工具调用比率降低了 25.9%。
 
 ### 引用
 
-敬请期待。
+如果使用或参考本工作，请引用以下论文。
+
+```bibtex
+@misc{liu2026rsureagentreliableusetool,
+  title={RSure-Agent: Reliable Use of Tool Observations for Remote Sensing Agents},
+  author={Fuyuan Liu and Nayu Liu and Wenhao Yu and Peijin Wang and Yingchao Feng and Fanglong Yao and Liang Wan and Wei Feng},
+  year={2026},
+  eprint={2610.04836},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2610.04836},
+}
+```
