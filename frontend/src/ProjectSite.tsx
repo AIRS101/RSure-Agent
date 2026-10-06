@@ -12,7 +12,7 @@ import scaleVideoZh from "../../demo-videos/zh/rsure-agent-demo-scale-measuremen
 import combinedVideoZh from "../../demo-videos/zh/rsure-agent-demo-combined-zh.mp4?url";
 
 const BASE_URL = import.meta.env.BASE_URL;
-const REPOSITORY_URL = "https://github.com/AIRS101/RSure-Agent";
+const REPOSITORY_URL = "https://github.com/airs101/RSure-Agent";
 const PAPER_TITLE = paper.title.replace("RSure-Agent: ", "");
 const combinedDemos = {
   en: { video: combinedVideo, duration: "1:03" },
@@ -143,9 +143,9 @@ export default function ProjectSite() {
               <h2 id="abstract-title">{t("Abstract", "摘要")}</h2>
               <p>
                 {paper.abstract[language]}{" "}
-                {t("The project is available at ", "项目地址为 ")}
+                {t("The demo is available at ", "演示已在 ")}
                 <a href={REPOSITORY_URL} target="_blank" rel="noreferrer">{REPOSITORY_URL}</a>
-                {t(".", "。")}
+                {t(", and the code will also be released for further research.", " 提供，代码也将公开，以支持后续研究。")}
               </p>
             </section>
             <section className="paper-section" aria-labelledby="paper-link-title">
