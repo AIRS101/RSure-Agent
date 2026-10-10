@@ -1,7 +1,8 @@
-import { ArrowRight, ArrowUpRight, Download, FileText, Play } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Download, FileText, Play, ShieldCheck } from "lucide-react";
 import { useEffect } from "react";
 import citation from "../../CITATION.bib?raw";
 import { paper } from "./paper";
+import DemoWorkbench from "./DemoWorkbench";
 import changeVideo from "../../demo-videos/rsure-agent-demo-change-detection.mp4?url";
 import objectVideo from "../../demo-videos/rsure-agent-demo-object-detection.mp4?url";
 import scaleVideo from "../../demo-videos/rsure-agent-demo-scale-measurement.mp4?url";
@@ -62,13 +63,15 @@ export default function ProjectSite() {
 
   useEffect(() => {
     document.documentElement.lang = language === "en" ? "en" : "zh-CN";
+    document.documentElement.dataset.page = isDemoPage ? "demo" : "paper";
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDemoPage ? "#07110e" : "#fcfcfb");
     document.title = `${isDemoPage ? t("Demos", "演示") : "RSure-Agent"} · ${isDemoPage ? "RSure-Agent" : paperTitle}`;
   }, [isDemoPage, language]);
 
   return (
-    <div className="site-shell">
+    <div className={`site-shell${isDemoPage ? " demo-theme" : ""}`}>
       <header className="site-header page-width">
-        <a className="wordmark" href={pageUrl(false)}>RSure-Agent<span aria-hidden="true">.</span></a>
+        <a className="wordmark" href={pageUrl(false)}>{isDemoPage && <span className="wb-brand-mark" aria-hidden="true"><ShieldCheck size={16} /></span>}RSure-Agent<span aria-hidden="true">.</span></a>
         <nav className="main-nav" aria-label={t("Main navigation", "主导航")}>
           <a href={pageUrl(false)} aria-current={!isDemoPage ? "page" : undefined}>{t("Paper", "论文")}</a>
           <a href={pageUrl(true)} aria-current={isDemoPage ? "page" : undefined}>{t("Demos", "演示")}</a>
@@ -81,9 +84,10 @@ export default function ProjectSite() {
 
       {isDemoPage ? (
         <main className="demo-page page-width">
-          <section className="demo-intro">
+          <DemoWorkbench language={language} />
+          <section className="demo-intro" id="recorded-demos">
             <p className="eyebrow">{t("RECORDED DEMONSTRATIONS", "案例演示")}</p>
-            <h1>{t("Three scenarios. Traceable evidence.", "三个场景，可追溯的证据。")}</h1>
+            <h2>{t("Three scenarios. Traceable evidence.", "三个场景，可追溯的证据。")}</h2>
             <p className="intro-copy">{t("Watch the recorded analysis and tool evidence for each remote sensing scenario.", "通过演示视频查看每个遥感场景的分析过程与工具证据。")}</p>
             <a className="inline-link" href={combinedDemo.video} target="_blank" rel="noreferrer"><Play size={15} />{t("Watch all three demos", "观看三个案例合集")} · {combinedDemo.duration}<ArrowUpRight size={14} /></a>
           </section>

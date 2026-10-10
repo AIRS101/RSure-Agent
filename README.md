@@ -47,6 +47,8 @@ RSure-Agent materials will be released in stages. Release progress will be updat
 
 ## Demo Video
 
+The [case replay workspace](https://airs101.github.io/RSure-Agent/demo/) lets you step through each recorded tool call and observation, then inspect the segmentation, detection, measurement, and JSON evidence through clickable citations.
+
 <p align="center">
   <a href="https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4"><img src="demo-videos/rsure-agent-demo-preview.gif" alt="Animated preview of three RSure-Agent cases" width="900" /></a>
 </p>
