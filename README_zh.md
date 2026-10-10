@@ -54,7 +54,7 @@ RSure-Agent 的相关材料将分阶段发布，发布进展将在本仓库更�
 </p>
 
 <p align="center">
-  <strong><a href="https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/zh/rsure-agent-demo-combined-zh.mp4">观看完整演示（约 57 秒）</a></strong>
+  <strong><a href="https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/zh/rsure-agent-demo-combined-zh.mp4">观看完整演示（约 78 秒）</a></strong>
 </p>
 
 <p align="center">

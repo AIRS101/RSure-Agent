@@ -16,8 +16,8 @@ const BASE_URL = import.meta.env.BASE_URL;
 const REPOSITORY_URL = "https://github.com/airs101/RSure-Agent";
 const PAPER_TITLE = paper.title.replace("RSure-Agent: ", "");
 const combinedDemos = {
-  en: { video: combinedVideo, duration: "1:03" },
-  zh: { video: combinedVideoZh, duration: "0:57" }
+  en: { video: combinedVideo, duration: "1:20" },
+  zh: { video: combinedVideoZh, duration: "1:18" }
 };
 
 const cases = [
@@ -29,7 +29,7 @@ const cases = [
       zh: "对比两个时相的遥感影像，查看土地覆盖分割叠加图，以及支持变化判断的定量证据。"
     },
     video: { en: changeVideo, zh: changeVideoZh },
-    duration: { en: "0:22", zh: "0:21" }
+    duration: { en: "0:26", zh: "0:25" }
   },
   {
     id: "object-detection",
@@ -39,7 +39,7 @@ const cases = [
       zh: "识别红框内的储罐，查看视觉问答结果和目标检测框，了解最终答案所依据的工具证据。"
     },
     video: { en: objectVideo, zh: objectVideoZh },
-    duration: { en: "0:17", zh: "0:19" }
+    duration: { en: "0:27", zh: "0:24" }
   },
   {
     id: "scale-measurement",
@@ -49,7 +49,7 @@ const cases = [
       zh: "根据地图比例尺估算 A、B 两点间的实际距离，查看地图标注与比例尺识别结果，以及距离量测证据。"
     },
     video: { en: scaleVideo, zh: scaleVideoZh },
-    duration: { en: "0:23", zh: "0:17" }
+    duration: { en: "0:27", zh: "0:29" }
   }
 ];
 
@@ -107,7 +107,7 @@ export default function ProjectSite() {
                   controls
                   playsInline
                   preload="none"
-                  poster={`${BASE_URL}demo/video-posters/${language === "zh" ? "zh/" : ""}${item.id}.png`}
+                  poster={`${BASE_URL}demo/video-posters/${language === "zh" ? "zh/" : ""}${item.id}.png?v=20261010`}
                   aria-label={item.title[language]}
                   onPlay={(event) => {
                     document.querySelectorAll("video").forEach((video) => {
