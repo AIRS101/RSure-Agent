@@ -15,6 +15,7 @@ export default function DemoWorkbench({ language }: { language: DemoLanguage }) 
   const [replay, setReplay] = useState({ caseIndex: 0, phase: 0, playing: false });
   const [toolPlanOpen, setToolPlanOpen] = useState(false);
   const [selectedEvidence, setSelectedEvidence] = useState<number | null>(null);
+  const outputScroll = useRef<HTMLDivElement>(null);
   const item = workspaceCases[replay.caseIndex];
   const finished = replay.phase === LAST_PHASE;
   const completed = Math.min(3, Math.floor(replay.phase / 2));
@@ -34,6 +35,13 @@ export default function DemoWorkbench({ language }: { language: DemoLanguage }) 
     }, 1800);
     return () => window.clearInterval(timer);
   }, [replay.playing, replay.caseIndex]);
+
+  useEffect(() => {
+    const panel = outputScroll.current;
+    if (!panel) return;
+    if (replay.phase === 0) panel.scrollTop = 0;
+    else if (finished) panel.scrollTop = panel.scrollHeight;
+  }, [replay.caseIndex, replay.phase, finished]);
 
   function chooseCase(caseIndex: number) {
     setReplay({ caseIndex, phase: 0, playing: false });
@@ -65,7 +73,9 @@ export default function DemoWorkbench({ language }: { language: DemoLanguage }) 
           <button type="button" className={!toolPlanOpen ? "selected" : ""} aria-pressed={!toolPlanOpen} onClick={() => setToolPlanOpen(false)}><ShieldCheck size={14} />{t("Agent", "智能体")}</button>
           <button type="button" className={toolPlanOpen ? "selected" : ""} aria-pressed={toolPlanOpen} onClick={() => setToolPlanOpen(true)}><Workflow size={14} />{t("Tool chain", "工具链")}</button>
         </div>
-        {toolPlanOpen ? <ol className="wb-tool-plan">{item.records.map(record => <li key={record.id}><strong>{record.title[language]}</strong><code>{record.tool}</code><p>{record.purpose[language]}</p></li>)}</ol> : <div className="wb-question"><label htmlFor="demo-question">{t("Analysis task", "分析任务")}</label><textarea id="demo-question" value={item.question[language]} readOnly /></div>}
+        <div className="wb-input-detail" key={`${item.id}-${toolPlanOpen}`} role="region" aria-label={t("Task details", "任务详情")} tabIndex={0}>
+          {toolPlanOpen ? <ol className="wb-tool-plan">{item.records.map(record => <li key={record.id}><strong>{record.title[language]}</strong><code>{record.tool}</code><p>{record.purpose[language]}</p></li>)}</ol> : <div className="wb-question"><label htmlFor="demo-question">{t("Analysis task", "分析任务")}</label><textarea id="demo-question" value={item.question[language]} readOnly /></div>}
+        </div>
         <div className="wb-controls">
           <button type="button" className="wb-primary" onClick={replay.playing ? () => setReplay(previous => ({ ...previous, playing: false })) : start}>{replay.playing ? <Pause size={15} /> : <Play size={15} />}{replay.playing ? t("Pause execution", "暂停执行") : finished ? t("Run again", "重新执行") : replay.phase ? t("Continue execution", "继续执行") : t("Start execution", "开始执行")}</button>
           <button type="button" className="wb-icon-button" aria-label={t("Reset task", "重置任务")} onClick={() => chooseCase(replay.caseIndex)}><RotateCcw size={15} /></button>
@@ -80,9 +90,11 @@ export default function DemoWorkbench({ language }: { language: DemoLanguage }) 
           <p>{currentEvent ? `${currentEvent.title}: ${currentEvent.detail}` : t("Choose a case and start the analysis. Follow the tool workflow and inspect the evidence supporting the conclusion.", "选择案例并开始执行，查看工具分析过程、返回结果及结论依据。")}</p>
           {replay.phase > 0 && replay.phase < 7 && <code>{currentTool.tool}</code>}
         </div>
-        {replay.phase > 0 && <ol className="wb-events" aria-label={t("Tool activity", "工具执行记录")}>{events.slice(0, replay.phase).slice(-4).map(event => <li key={event.title}><span>{event.title}</span><p>{event.detail}</p></li>)}</ol>}
-        <div className="wb-result-heading"><strong><FileJson size={14} />{t("Analysis result", "分析结果")}</strong><span>{t(`${completed} evidence records`, `${completed} 条证据可核查`)}</span></div>
-        {finished ? <article className="wb-answer"><div className="wb-conclusion"><span>{t("Conclusion", "结论")}</span><h2>{item.conclusion[language]}</h2></div><div className="wb-analysis"><strong>{t("Analysis", "分析")}</strong>{item.analysis.map(paragraph => <p key={paragraph.evidence}>{paragraph.text[language]} <button type="button" className="wb-citation" onClick={() => setSelectedEvidence(item.records.findIndex(record => record.id === paragraph.evidence))}>[{paragraph.evidence}]<ArrowUpRight size={11} /></button></p>)}</div></article> : <div className="wb-empty"><Workflow size={27} /><p>{replay.phase ? t("Analyzing the task…", "正在执行分析任务…") : t("Waiting for an analysis task", "等待分析任务")}</p></div>}
+        <div className="wb-output-scroll" role="region" aria-label={t("Tool activity and analysis results", "工具过程与分析结果")} tabIndex={0} ref={outputScroll}>
+          {replay.phase > 0 && <ol className="wb-events" aria-label={t("Tool activity", "工具执行记录")}>{events.slice(0, replay.phase).slice(-4).map(event => <li key={event.title}><span>{event.title}</span><p>{event.detail}</p></li>)}</ol>}
+          <div className="wb-result-heading"><strong><FileJson size={14} />{t("Analysis result", "分析结果")}</strong><span>{t(`${completed} evidence records`, `${completed} 条证据可核查`)}</span></div>
+          {finished ? <article className="wb-answer"><div className="wb-conclusion"><span>{t("Conclusion", "结论")}</span><h2>{item.conclusion[language]}</h2></div><div className="wb-analysis"><strong>{t("Analysis", "分析")}</strong>{item.analysis.map(paragraph => <p key={paragraph.evidence}>{paragraph.text[language]} <button type="button" className="wb-citation" onClick={() => setSelectedEvidence(item.records.findIndex(record => record.id === paragraph.evidence))}>[{paragraph.evidence}]<ArrowUpRight size={11} /></button></p>)}</div></article> : <div className="wb-empty"><Workflow size={27} /><p>{replay.phase ? t("Analyzing the task…", "正在执行分析任务…") : t("Waiting for an analysis task", "等待分析任务")}</p></div>}
+        </div>
         {completed > 0 && <div className="wb-evidence-buttons" aria-label={t("Collected evidence", "已展示的证据")}>{item.records.slice(0, completed).map((record, index) => <button key={record.id} type="button" onClick={() => setSelectedEvidence(index)}><span>{record.id}</span>{record.title[language]}<ArrowUpRight size={13} /></button>)}</div>}
       </section>
       {selectedEvidence !== null && <EvidenceReader key={item.id} item={item} index={selectedEvidence} available={completed} language={language} onSelect={setSelectedEvidence} onClose={() => setSelectedEvidence(null)} />}
