@@ -28,15 +28,15 @@
 .wb-glass { background: linear-gradient(145deg, #1b2922a6, #101b16b0 40%, #07110dc9); border: 1px solid var(--wb-border); border-radius: 12px; box-shadow: inset 0 1px 0 #e0ffe311, inset 0 -1px 0 #01070588, 0 18px 40px #00000024; backdrop-filter: blur(20px); }
 .wb-input { padding: 9px; overflow: hidden; }
 .wb-source { display: grid; place-items: center; overflow: hidden; border: 1px solid #b9edcf1f; border-radius: 7px; background: #010805; min-height: 160px; }
-.wb-source img { display: block; width: 100%; height: 210px; object-fit: contain; }
-.wb-mission { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 12px 10px; margin-top: 8px; background: #15211b55; border: 1px solid var(--wb-border); border-radius: 7px; }
+.wb-source img { display: block; width: 100%; height: 180px; object-fit: contain; }
+.wb-mission { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 10px; margin-top: 8px; background: #15211b55; border: 1px solid var(--wb-border); border-radius: 7px; }
 .wb-mission > div { display: flex; flex-direction: column; }
 .wb-mission span { color: var(--muted); font-size: 11px; }
 .wb-mission strong { font-size: 20px; line-height: 1.35; }
 .wb-mission p { font-size: 12px; color: var(--muted); text-align: right; }
 .wb-case-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin: 8px 0; }
-.wb-case-picker button { position: relative; min-height: 92px; overflow: hidden; padding: 0; border: 1px solid #bce4cb1a; border-radius: 6px; background: #0d1812; text-align: left; }
-.wb-case-picker img { width: 100%; height: 92px; object-fit: cover; display: block; opacity: .72; transition: opacity .2s; }
+.wb-case-picker button { position: relative; min-height: 82px; overflow: hidden; padding: 0; border: 1px solid #bce4cb1a; border-radius: 6px; background: #0d1812; text-align: left; }
+.wb-case-picker img { width: 100%; height: 82px; object-fit: cover; display: block; opacity: .72; transition: opacity .2s; }
 .wb-case-picker button:hover img { opacity: .95; }
 .wb-case-picker button.selected { border-color: #9fffd29c; box-shadow: 0 0 12px #48e6a01a, inset 0 0 0 1px #bfffd12a; }
 .wb-case-picker button > span { position: absolute; inset: auto 0 0; padding: 19px 7px 6px; background: linear-gradient(transparent, #020c08ee); display: flex; flex-direction: column; }
@@ -46,10 +46,8 @@
 .wb-tabs button { display: flex; align-items: center; justify-content: center; gap: 6px; flex: 1; border: 1px solid transparent; border-radius: 4px; background: transparent; color: var(--muted); padding: 6px 5px; font-size: 12px; }
 .wb-tabs button.selected { background: linear-gradient(#32544777, #1b342966); color: #c3f6df; border-color: #b3eaca26; box-shadow: inset 0 1px 0 #d8fff51c; }
 .wb-question label { display: block; font-size: 12px; color: var(--muted); margin: 0 2px 7px; }
-.wb-question textarea { width: 100%; min-height: 109px; padding: 11px; background: var(--wb-field); border: 1px solid var(--wb-border); border-radius: 6px; color: #e7f0ea; font: inherit; font-size: 14px; line-height: 1.9; resize: vertical; }
-.wb-replay-note { display: flex; align-items: start; gap: 6px; margin: 11px 2px 14px; font-size: 11px; color: var(--muted); line-height: 1.6; }
-.wb-replay-note svg { margin-top: 3px; }
-.wb-controls { display: flex; align-items: center; gap: 7px; padding: 0 1px 3px; }
+.wb-question textarea { width: 100%; min-height: 91px; padding: 11px; background: var(--wb-field); border: 1px solid var(--wb-border); border-radius: 6px; color: #e7f0ea; font: inherit; font-size: 14px; line-height: 1.9; resize: vertical; }
+.wb-controls { display: flex; align-items: center; gap: 7px; margin-top: 12px; padding: 0 1px 3px; }
 .wb-primary, .wb-small-button, .wb-icon-button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border-radius: 6px; min-height: 35px; font-size: 12px !important; padding: 6px 10px; }
 .demo-theme .wb-primary { background: linear-gradient(135deg, #a0f7d5, #4dd6a2 65%, #32b985); color: #052116; border: 1px solid #adffdf9c; box-shadow: inset 0 1px 0 #eefff7b3, inset 0 -1px 1px #21745966, 0 0 17px #53edb330; font-weight: 650; flex: 1; }
 .demo-theme .wb-primary:hover { filter: brightness(1.1); box-shadow: inset 0 1px 0 #eefff7b3, 0 0 22px #53edb34a; }

@@ -86,9 +86,9 @@ export default function ProjectSite() {
         <main className="demo-page page-width">
           <DemoWorkbench language={language} />
           <section className="demo-intro" id="recorded-demos">
-            <p className="eyebrow">{t("RECORDED DEMONSTRATIONS", "案例演示")}</p>
+            <p className="eyebrow">{t("DEMO VIDEOS", "案例演示")}</p>
             <h2>{t("Three scenarios. Traceable evidence.", "三个场景，可追溯的证据。")}</h2>
-            <p className="intro-copy">{t("Watch the recorded analysis and tool evidence for each remote sensing scenario.", "通过演示视频查看每个遥感场景的分析过程与工具证据。")}</p>
+            <p className="intro-copy">{t("Watch the analysis workflow and tool evidence for each remote sensing scenario.", "通过演示视频查看每个遥感场景的分析过程与工具证据。")}</p>
             <a className="inline-link" href={combinedDemo.video} target="_blank" rel="noreferrer"><Play size={15} />{t("Watch all three demos", "观看三个案例合集")} · {combinedDemo.duration}<ArrowUpRight size={14} /></a>
           </section>
 

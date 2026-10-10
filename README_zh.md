@@ -47,7 +47,7 @@ RSure-Agent 的相关材料将分阶段发布，发布进展将在本仓库更�
 
 ## 演示视频
 
-在[案例回放工作台](https://airs101.github.io/RSure-Agent/demo/?lang=zh)中，可逐步查看三个案例的工具调用与返回结果，点击证据编号核查分割图、检测叠加图、量测图及结果 JSON。
+在[演示工作台](https://airs101.github.io/RSure-Agent/demo/?lang=zh)中，可查看三个遥感案例的工具分析过程与返回结果，点击证据编号核查分割掩码、检测叠加图、量测图及结果 JSON。
 
 <p align="center">
   <a href="https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/zh/rsure-agent-demo-combined-zh.mp4"><img src="demo-videos/zh/rsure-agent-demo-preview-zh.gif" alt="RSure-Agent 三个案例的动态预览" width="900" /></a>
