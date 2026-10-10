@@ -39,8 +39,7 @@ export default function DemoWorkbench({ language }: { language: DemoLanguage }) 
   useEffect(() => {
     const panel = outputScroll.current;
     if (!panel) return;
-    if (replay.phase === 0) panel.scrollTop = 0;
-    else if (finished) panel.scrollTop = panel.scrollHeight;
+    if (replay.phase === 0 || finished) panel.scrollTop = 0;
   }, [replay.caseIndex, replay.phase, finished]);
 
   function chooseCase(caseIndex: number) {
@@ -58,8 +57,8 @@ export default function DemoWorkbench({ language }: { language: DemoLanguage }) 
   ]);
   events.push({ title: t("Synthesizing the answer", "正在总结结论"), detail: t("Combine the tool observations and supporting evidence to produce the final answer.", "结合工具观测与证据，生成最终答案。") });
   events.push({ title: t("Analysis complete", "分析完成"), detail: t("The conclusion and three evidence records are ready to inspect.", "结论与三条证据已展示，可点击核查。") });
-  const currentEvent = replay.phase ? events[replay.phase - 1] : null;
-  const stage = replay.phase === 0 ? t("Waiting for a task", "等待任务") : finished ? t("Analysis complete", "分析完成") : replay.phase >= 7 ? t("Synthesizing the answer", "正在总结结论") : replay.phase <= 2 ? t("Planning the workflow", "正在规划工作") : t("Executing tools", "正在执行工具");
+  const visibleEvents = events.slice(0, replay.phase).slice(-4);
+  const stackDepth = Math.max(0, visibleEvents.length - 1);
 
   return (
     <section className="demo-workbench" aria-label={t("Remote sensing analysis workspace", "遥感分析工作台")}>
@@ -85,13 +84,15 @@ export default function DemoWorkbench({ language }: { language: DemoLanguage }) 
       <section className="wb-output wb-glass" aria-labelledby="workspace-title">
         <header className="wb-output-heading"><div><p>{t("ANALYSIS WORKSPACE", "遥感分析工作区")}</p><h1 id="workspace-title">{t("Mission workspace", "任务工作区")}</h1></div><span className={`wb-status ${finished ? "complete" : replay.phase ? "active" : ""}`}>{finished ? <CheckCircle2 size={13} /> : <Activity size={13} />}{status}</span></header>
         <div className="wb-progress" aria-label={t("Execution progress", "执行进度")} role="progressbar" aria-valuemin={0} aria-valuemax={LAST_PHASE} aria-valuenow={replay.phase}><span style={{ width: `${replay.phase / LAST_PHASE * 100}%` }} /></div>
-        <div className={`wb-narration ${finished ? "complete" : ""}`} aria-live="polite">
-          <strong>{replay.playing ? <Loader2 size={15} className="wb-spin" /> : finished ? <CheckCircle2 size={15} /> : <Activity size={15} />}{stage}</strong>
-          <p>{currentEvent ? `${currentEvent.title}: ${currentEvent.detail}` : t("Choose a case and start the analysis. Follow the tool workflow and inspect the evidence supporting the conclusion.", "选择案例并开始执行，查看工具分析过程、返回结果及结论依据。")}</p>
-          {replay.phase > 0 && replay.phase < 7 && <code>{currentTool.tool}</code>}
-        </div>
-        <div className="wb-output-scroll" role="region" aria-label={t("Tool activity and analysis results", "工具过程与分析结果")} tabIndex={0} ref={outputScroll}>
-          {replay.phase > 0 && <ol className="wb-events" aria-label={t("Tool activity", "工具执行记录")}>{events.slice(0, replay.phase).slice(-4).map(event => <li key={event.title}><span>{event.title}</span><p>{event.detail}</p></li>)}</ol>}
+        {replay.phase > 0 ? <ol className="wb-event-stack" style={{ paddingTop: stackDepth * 22 }} aria-label={t("Tool activity", "工具执行记录")}>
+          {visibleEvents.map((event, index) => {
+            const current = index === stackDepth;
+            return <li key={event.title} className={current ? `wb-narration wb-event-current${finished ? " complete" : ""}` : "wb-event-back"} style={current ? undefined : { top: index * 22, left: (stackDepth - index) * 7, right: (stackDepth - index) * 7 }} aria-hidden={current ? undefined : true}>
+              {current ? <div aria-live="polite"><div className="wb-event-heading"><strong>{replay.playing ? <Loader2 size={15} className="wb-spin" /> : finished ? <CheckCircle2 size={15} /> : <Activity size={15} />}{event.title}</strong><span>{replay.phase} / {LAST_PHASE}</span></div><p>{event.detail}</p>{replay.phase < 7 && <code>{currentTool.tool}</code>}</div> : <span>{event.title}</span>}
+            </li>;
+          })}
+        </ol> : <div className="wb-narration" aria-live="polite"><strong><Activity size={15} />{t("Waiting for a task", "等待任务")}</strong><p>{t("Choose a case and start the analysis. Follow the tool workflow and inspect the evidence supporting the conclusion.", "选择案例并开始执行，查看工具分析过程、返回结果及结论依据。")}</p></div>}
+        <div className="wb-output-scroll" role="region" aria-label={t("Analysis results", "分析结果")} tabIndex={0} ref={outputScroll}>
           <div className="wb-result-heading"><strong><FileJson size={14} />{t("Analysis result", "分析结果")}</strong><span>{t(`${completed} evidence records`, `${completed} 条证据可核查`)}</span></div>
           {finished ? <article className="wb-answer"><div className="wb-conclusion"><span>{t("Conclusion", "结论")}</span><h2>{item.conclusion[language]}</h2></div><div className="wb-analysis"><strong>{t("Analysis", "分析")}</strong>{item.analysis.map(paragraph => <p key={paragraph.evidence}>{paragraph.text[language]} <button type="button" className="wb-citation" onClick={() => setSelectedEvidence(item.records.findIndex(record => record.id === paragraph.evidence))}>[{paragraph.evidence}]<ArrowUpRight size={11} /></button></p>)}</div></article> : <div className="wb-empty"><Workflow size={27} /><p>{replay.phase ? t("Analyzing the task…", "正在执行分析任务…") : t("Waiting for an analysis task", "等待分析任务")}</p></div>}
         </div>
