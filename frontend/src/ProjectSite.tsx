@@ -35,8 +35,8 @@ const cases = [
     id: "object-detection",
     title: { en: "Object identification and detection", zh: "目标识别与检测" },
     description: {
-      en: "Identify the storage tank inside the red box and follow the visual recognition and object-detection evidence used in the answer.",
-      zh: "识别红框内的储罐，查看视觉识别结果和目标检测框，了解最终答案所依据的工具证据。"
+      en: "Identify the storage tank inside the red box and follow the visual question answering and object-detection evidence used in the answer.",
+      zh: "识别红框内的储罐，查看视觉问答结果和目标检测框，了解最终答案所依据的工具证据。"
     },
     video: { en: objectVideo, zh: objectVideoZh },
     duration: { en: "0:17", zh: "0:19" }
@@ -45,8 +45,8 @@ const cases = [
     id: "scale-measurement",
     title: { en: "Scale-based distance measurement", zh: "比例尺测距" },
     description: {
-      en: "Estimate the distance between A and B using the map scale, and inspect the layout and measurement evidence.",
-      zh: "根据地图比例尺估算 A、B 两点间的实际距离，查看版面识别结果与距离量测证据。"
+      en: "Estimate the distance between A and B using the map scale, and inspect the map label and scale recognition results and distance-measurement evidence.",
+      zh: "根据地图比例尺估算 A、B 两点间的实际距离，查看地图标注与比例尺识别结果，以及距离量测证据。"
     },
     video: { en: scaleVideo, zh: scaleVideoZh },
     duration: { en: "0:23", zh: "0:17" }

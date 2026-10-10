@@ -64,7 +64,7 @@ RSure-Agent 的相关材料将分阶段发布，发布进展将在本仓库更�
 | 场景 | 演示内容 |
 | --- | --- |
 | [土地覆盖变化检测](demo-videos/zh/rsure-agent-demo-change-detection-zh.mp4) | 查看两个时相的分割叠加图与定量证据。 |
-| [目标识别与检测](demo-videos/zh/rsure-agent-demo-object-detection-zh.mp4) | 查看储罐的视觉识别与目标检测证据。 |
+| [目标识别与检测](demo-videos/zh/rsure-agent-demo-object-detection-zh.mp4) | 查看储罐的视觉问答与目标检测证据。 |
 | [比例尺测距](demo-videos/zh/rsure-agent-demo-scale-measurement-zh.mp4) | 查看 A、B 两点间距离的比例尺与量测证据。 |
 
 ## 论文

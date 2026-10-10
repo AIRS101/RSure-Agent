@@ -64,7 +64,7 @@ The [demo workspace](https://airs101.github.io/RSure-Agent/demo/) presents the t
 | Scenario | Demonstration |
 | --- | --- |
 | [Land-cover change analysis](demo-videos/rsure-agent-demo-change-detection.mp4) | Segmentation overlays and quantitative evidence from two time points. |
-| [Object identification and detection](demo-videos/rsure-agent-demo-object-detection.mp4) | Visual recognition and detection evidence for a storage tank. |
+| [Object identification and detection](demo-videos/rsure-agent-demo-object-detection.mp4) | Visual question answering and object-detection evidence for a storage tank. |
 | [Scale-based distance measurement](demo-videos/rsure-agent-demo-scale-measurement.mp4) | Map-scale and measurement evidence for the distance between A and B. |
 
 ## Paper
