@@ -9,7 +9,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         paper: fileURLToPath(new URL('./index.html', import.meta.url)),
-        demos: fileURLToPath(new URL('./demo/index.html', import.meta.url))
+        demos: fileURLToPath(new URL('./demo/index.html', import.meta.url)),
+        demosZh: fileURLToPath(new URL('./demo/zh/index.html', import.meta.url))
       }
     }
   }

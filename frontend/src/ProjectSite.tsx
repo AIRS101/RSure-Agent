@@ -54,12 +54,13 @@ const cases = [
 ];
 
 export default function ProjectSite() {
-  const language = new URLSearchParams(window.location.search).get("lang") === "zh" ? "zh" : "en";
-  const isDemoPage = window.location.pathname.replace(/\/$/, "").endsWith("/demo");
+  const pathname = window.location.pathname.replace(/\/$/, "");
+  const language = pathname.endsWith("/demo/zh") || new URLSearchParams(window.location.search).get("lang") === "zh" ? "zh" : "en";
+  const isDemoPage = /\/demo(?:\/zh)?$/.test(pathname);
   const t = (en: string, zh: string) => language === "en" ? en : zh;
   const paperTitle = t(PAPER_TITLE, "遥感智能体对工具观测的可靠利用");
   const combinedDemo = combinedDemos[language];
-  const pageUrl = (demo: boolean, lang = language) => `${BASE_URL}${demo ? "demo/" : ""}${lang === "zh" ? "?lang=zh" : ""}`;
+  const pageUrl = (demo: boolean, lang = language) => `${BASE_URL}${demo ? lang === "zh" ? "demo/zh/" : "demo/" : lang === "zh" ? "?lang=zh" : ""}`;
 
   useEffect(() => {
     document.documentElement.lang = language === "en" ? "en" : "zh-CN";

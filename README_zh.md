@@ -15,13 +15,13 @@
   &nbsp;
   <a href="https://airs101.github.io/RSure-Agent/?lang=zh"><img src="https://img.shields.io/badge/%E9%A1%B9%E7%9B%AE%E7%BD%91%E7%AB%99-%E8%AE%BF%E9%97%AE%E4%B8%BB%E9%A1%B5-315ecc" alt="项目网站" /></a>
   &nbsp;
-  <a href="https://airs101.github.io/RSure-Agent/demo/?lang=zh"><img src="https://img.shields.io/badge/%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91-%E6%9F%A5%E7%9C%8B%E6%BC%94%E7%A4%BA-315ecc" alt="演示视频" /></a>
+  <a href="https://airs101.github.io/RSure-Agent/demo/zh/"><img src="https://img.shields.io/badge/%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91-%E6%9F%A5%E7%9C%8B%E6%BC%94%E7%A4%BA-315ecc" alt="演示视频" /></a>
 </p>
 
 <p align="center">
   <a href="https://airs101.github.io/RSure-Agent/?lang=zh"><img src="assets/readme/website-zh.svg" alt="访问项目网站" width="154" height="48" /></a>
   &nbsp;
-  <a href="https://airs101.github.io/RSure-Agent/demo/?lang=zh"><img src="assets/readme/demos-zh.svg" alt="观看演示视频" width="154" height="48" /></a>
+  <a href="https://airs101.github.io/RSure-Agent/demo/zh/"><img src="assets/readme/demos-zh.svg" alt="观看演示视频" width="154" height="48" /></a>
 </p>
 
 <p align="center">
@@ -47,7 +47,7 @@ RSure-Agent 的相关材料将分阶段发布，发布进展将在本仓库更�
 
 ## 演示视频
 
-在[演示工作台](https://airs101.github.io/RSure-Agent/demo/?lang=zh)中，可查看三个遥感案例的工具分析过程与返回结果，点击证据编号核查分割掩码、检测叠加图、量测图及结果 JSON。
+在[演示工作台](https://airs101.github.io/RSure-Agent/demo/zh/)中，可查看三个遥感案例的工具分析过程与返回结果，点击证据编号核查分割掩码、检测叠加图、量测图及结果 JSON。
 
 <p align="center">
   <a href="https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/zh/rsure-agent-demo-combined-zh.mp4"><img src="demo-videos/zh/rsure-agent-demo-preview-zh.gif" alt="RSure-Agent 三个案例的动态预览" width="900" /></a>
