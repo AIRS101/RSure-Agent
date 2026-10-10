@@ -24,9 +24,9 @@
 .demo-theme button:focus-visible, .demo-theme a:focus-visible, .demo-theme textarea:focus-visible { outline: 2px solid var(--wb-mint); outline-offset: 3px; }
 .demo-theme h3, .demo-theme h4, .demo-theme figure { margin: 0; }
 .demo-theme ::selection { color: #071b11; background: #83edbd; }
-.demo-workbench { display: grid; grid-template-columns: minmax(300px, .55fr) minmax(0, 1fr); gap: 14px; padding-top: 18px; align-items: start; }
+.demo-workbench { display: grid; grid-template-columns: minmax(300px, .55fr) minmax(0, 1fr); gap: 14px; padding-top: 18px; align-items: stretch; }
 .wb-glass { background: linear-gradient(145deg, #1b2922a6, #101b16b0 40%, #07110dc9); border: 1px solid var(--wb-border); border-radius: 12px; box-shadow: inset 0 1px 0 #e0ffe311, inset 0 -1px 0 #01070588, 0 18px 40px #00000024; backdrop-filter: blur(20px); }
-.wb-input { padding: 9px; overflow: hidden; }
+.wb-input { display: flex; flex-direction: column; padding: 9px; overflow: hidden; }
 .wb-source { display: grid; place-items: center; overflow: hidden; border: 1px solid #b9edcf1f; border-radius: 7px; background: #010805; min-height: 160px; }
 .wb-source img { display: block; width: 100%; height: 180px; object-fit: contain; }
 .wb-mission { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 10px; margin-top: 8px; background: #15211b55; border: 1px solid var(--wb-border); border-radius: 7px; }
@@ -47,13 +47,13 @@
 .wb-tabs button.selected { background: linear-gradient(#32544777, #1b342966); color: #c3f6df; border-color: #b3eaca26; box-shadow: inset 0 1px 0 #d8fff51c; }
 .wb-question label { display: block; font-size: 12px; color: var(--muted); margin: 0 2px 7px; }
 .wb-question textarea { width: 100%; min-height: 91px; padding: 11px; background: var(--wb-field); border: 1px solid var(--wb-border); border-radius: 6px; color: #e7f0ea; font: inherit; font-size: 14px; line-height: 1.9; resize: vertical; }
-.wb-controls { display: flex; align-items: center; gap: 7px; margin-top: 12px; padding: 0 1px 3px; }
-.wb-primary, .wb-small-button, .wb-icon-button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border-radius: 6px; min-height: 35px; font-size: 12px !important; padding: 6px 10px; }
+.wb-controls { display: flex; align-items: center; gap: 7px; margin-top: auto; padding: 12px 1px 3px; }
+.wb-primary, .wb-icon-button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border-radius: 6px; min-height: 35px; font-size: 12px !important; padding: 6px 10px; }
 .demo-theme .wb-primary { background: linear-gradient(135deg, #a0f7d5, #4dd6a2 65%, #32b985); color: #052116; border: 1px solid #adffdf9c; box-shadow: inset 0 1px 0 #eefff7b3, inset 0 -1px 1px #21745966, 0 0 17px #53edb330; font-weight: 650; flex: 1; }
 .demo-theme .wb-primary:hover { filter: brightness(1.1); box-shadow: inset 0 1px 0 #eefff7b3, 0 0 22px #53edb34a; }
-.wb-small-button, .wb-icon-button { background: linear-gradient(#ffffff08, #ffffff02); color: #c4d1ca; border: 1px solid var(--wb-border); box-shadow: inset 0 1px 0 #ffffff0a; }
+.wb-icon-button { background: linear-gradient(#ffffff08, #ffffff02); color: #c4d1ca; border: 1px solid var(--wb-border); box-shadow: inset 0 1px 0 #ffffff0a; }
 .wb-icon-button { width: 34px; padding: 5px; flex-shrink: 0; }
-.wb-small-button:hover:not(:disabled), .wb-icon-button:hover:not(:disabled) { border-color: #a6f0c856; background: #2d4b3866; }
+.wb-icon-button:hover:not(:disabled) { border-color: #a6f0c856; background: #2d4b3866; }
 .wb-tool-plan { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 .wb-tool-plan li { padding: 9px; border: 1px solid var(--wb-border); border-radius: 5px; background: var(--wb-field); }
 .wb-tool-plan strong { display: block; font-size: 12px; color: var(--wb-mint); }

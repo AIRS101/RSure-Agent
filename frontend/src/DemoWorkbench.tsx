@@ -68,7 +68,6 @@ export default function DemoWorkbench({ language }: { language: DemoLanguage }) 
         {toolPlanOpen ? <ol className="wb-tool-plan">{item.records.map(record => <li key={record.id}><strong>{record.title[language]}</strong><code>{record.tool}</code><p>{record.purpose[language]}</p></li>)}</ol> : <div className="wb-question"><label htmlFor="demo-question">{t("Analysis task", "分析任务")}</label><textarea id="demo-question" value={item.question[language]} readOnly /></div>}
         <div className="wb-controls">
           <button type="button" className="wb-primary" onClick={replay.playing ? () => setReplay(previous => ({ ...previous, playing: false })) : start}>{replay.playing ? <Pause size={15} /> : <Play size={15} />}{replay.playing ? t("Pause execution", "暂停执行") : finished ? t("Run again", "重新执行") : replay.phase ? t("Continue execution", "继续执行") : t("Start execution", "开始执行")}</button>
-          <button type="button" className="wb-small-button" disabled={replay.playing || finished} onClick={() => setReplay(previous => ({ ...previous, phase: Math.min(LAST_PHASE, previous.phase + 1) }))}>{t("Next step", "下一步")}<ChevronRight size={14} /></button>
           <button type="button" className="wb-icon-button" aria-label={t("Reset task", "重置任务")} onClick={() => chooseCase(replay.caseIndex)}><RotateCcw size={15} /></button>
         </div>
       </aside>
