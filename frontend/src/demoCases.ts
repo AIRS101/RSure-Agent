@@ -18,6 +18,7 @@ export type WorkspaceCase = {
   title: DemoText;
   question: DemoText;
   conclusion: DemoText;
+  emphasis: DemoText[];
   analysis: { text: DemoText; evidence: string }[];
   records: DemoEvidence[];
 };
@@ -33,6 +34,7 @@ export const workspaceCases: WorkspaceCase[] = [
     title: text("Land-cover change", "土地覆盖变化检测"),
     question: text("Compare the two remote-sensing images, describe the main land-cover change, and provide quantitative evidence.", "请比较左右两个时相的遥感影像，说明主要土地覆盖变化，并给出可量化依据。"),
     conclusion: text("The clearest change is a substantial increase in building coverage.", "两个时相之间最显著的变化是建筑覆盖范围大幅增加。"),
+    emphasis: [text("substantial increase in building coverage", "建筑覆盖范围大幅增加"), ...["1.01%", "70.09%", "69.07", "63.86%", "0.74%"].map(value => text(value, value))],
     analysis: [
       { text: text("The before and after segmentation overlays show the change in land-cover regions.", "前后时相的土地覆盖分割叠加图展示了地物区域的变化。"), evidence: "E002" },
       { text: text("The building share rose from 1.01% to 70.09%, an increase of approximately 69.07 percentage points. The background share fell from 63.86% to 0.74%.", "建筑类占比从 1.01% 增至 70.09%，增加约 69.07 个百分点；背景类占比从 63.86% 降至 0.74%。"), evidence: "E003" }
@@ -66,6 +68,7 @@ export const workspaceCases: WorkspaceCase[] = [
     id: "000885", image: "demo/000885.png", title: text("Object identification and detection", "目标识别与检测"),
     question: text("Identify the object inside the red box and explain the visual evidence supporting the answer.", "请判断遥感图像红色框中的目标是什么，并说明主要视觉依据。"),
     conclusion: text("The object inside the red box is a storage tank.", "红色框内目标是储罐。"),
+    emphasis: [text("storage tank", "储罐"), text("Storage tank", "储罐")],
     analysis: [
       { text: text("The target has a regular circular outline and sits within an industrial-facility setting, consistent with a storage tank.", "红框内目标呈规则的圆形工业构筑物外观，其轮廓和周边设施场景符合储罐特征。"), evidence: "E002" },
       { text: text("The detection overlay labels the same target as a storage tank. Inspect the box and its position on the source image.", "检测叠加图在相同位置标出储罐，可对照原始影像核查目标框及其位置。"), evidence: "E003" }
@@ -99,6 +102,7 @@ export const workspaceCases: WorkspaceCase[] = [
     id: "000925", image: "demo/000925.png", title: text("Scale-based distance measurement", "比例尺测距"),
     question: text("Estimate the actual distance between A and B using the map scale and explain the measurement evidence.", "请根据图中比例尺估算 A、B 两点间的实际距离，并说明量测依据。"),
     conclusion: text("The distance between A and B is approximately 280.2 m.", "A、B 两点间的实际距离约为 280.2 m。"),
+    emphasis: ["280.2 m", "280.214 m", "50 m"].map(value => text(value, value)),
     analysis: [
       { text: text("Map label and scale recognition locates points A and B and reads the 50 m scale-bar label.", "地图标注与比例尺识别工具定位 A、B 两点，并识别出比例尺标注为 50 m。"), evidence: "E002" },
       { text: text("Scale-based distance measurement gives 280.214 m. The overlay shows the point locations and scale bar used for the calculation.", "比例尺测距结果为 280.214 m，量测叠加图展示了计算所依据的点位与比例尺。"), evidence: "E003" }

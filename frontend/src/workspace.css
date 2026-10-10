@@ -33,11 +33,11 @@
 .wb-input-detail { flex: 1; }
 .wb-source { display: grid; place-items: center; overflow: hidden; border: 1px solid #b9edcf1f; border-radius: 7px; background: #010805; min-height: 160px; }
 .wb-source img { display: block; width: 100%; height: 220px; object-fit: contain; }
-.wb-mission { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 10px; margin-top: 8px; background: #15211b55; border: 1px solid var(--wb-border); border-radius: 7px; }
-.wb-mission > div { display: flex; flex-direction: column; }
-.wb-mission span { color: var(--muted); font-size: 11px; }
-.wb-mission strong { font-size: 20px; line-height: 1.35; }
-.wb-mission p { font-size: 12px; color: var(--muted); text-align: right; }
+.wb-current-case { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 10px; margin-top: 8px; background: #15211b55; border: 1px solid var(--wb-border); border-radius: 7px; }
+.wb-current-case > div { display: flex; flex-direction: column; }
+.wb-current-case span { color: var(--muted); font-size: 11px; }
+.wb-current-case strong { font-size: 20px; line-height: 1.35; }
+.wb-current-case p { font-size: 12px; color: var(--muted); text-align: right; }
 .wb-case-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin: 8px 0; }
 .wb-case-picker button { position: relative; min-height: 82px; overflow: hidden; padding: 0; border: 1px solid #bce4cb1a; border-radius: 6px; background: #0d1812; text-align: left; }
 .wb-case-picker img { width: 100%; height: 82px; object-fit: cover; display: block; opacity: .72; transition: opacity .2s; }
@@ -95,9 +95,12 @@
 .wb-empty p { font-size: 12px; }
 .wb-conclusion, .wb-analysis { padding: 13px; background: linear-gradient(140deg, #354e4033, #12271c20); border: 1px solid var(--wb-border); border-radius: 7px; }
 .wb-conclusion > span, .wb-analysis > strong { font-size: 12px; color: #9fdfbb; }
-.wb-conclusion h2 { font-size: clamp(18px, 1.9vw, 24px); line-height: 1.6; margin-top: 8px; letter-spacing: -.025em; }
+.wb-conclusion h2 { color: var(--wb-mint); font-size: clamp(16px, 1.6vw, 20px); font-weight: 550; line-height: 1.8; margin-top: 8px; letter-spacing: -.025em; }
+.wb-emphasis { color: var(--wb-mint); font-size: 1.25em; font-weight: 750; font-variant-numeric: tabular-nums; }
+.wb-conclusion .wb-emphasis { color: #f0fff7; font-size: 1.4em; }
+.wb-narration .wb-emphasis { display: inline; font-size: 1.25em; }
 .wb-analysis { margin-top: 8px; border-left-color: #b0efcd69; }
-.wb-analysis p { font-size: 12px; line-height: 1.95; margin-top: 7px; color: #d0dcd4; }
+.wb-analysis p { font-size: 14px; line-height: 2; margin-top: 7px; color: #d0dcd4; }
 .wb-citation { display: inline-flex; align-items: center; gap: 2px; vertical-align: baseline; padding: 1px 5px; background: #d4b56b1f; border: 1px solid #dfc87838; border-radius: 4px; color: #edd187 !important; font-size: 11px !important; }
 .wb-citation:hover { background: #d4b56b36; }
 .wb-evidence-buttons { display: flex; gap: 6px; flex-wrap: wrap; max-height: 96px; overflow-y: auto; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--wb-border); }
