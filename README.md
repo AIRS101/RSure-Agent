@@ -54,7 +54,7 @@ The [demo workspace](https://airs101.github.io/RSure-Agent/demo/) presents the t
 </p>
 
 <p align="center">
-  <strong><a href="https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4">Watch the full demo (~80 seconds)</a></strong>
+  <strong><a href="https://github.com/AIRS101/RSure-Agent/blob/main/demo-videos/rsure-agent-demo-combined.mp4">Watch the full demo (~77 seconds)</a></strong>
 </p>
 
 <p align="center">
