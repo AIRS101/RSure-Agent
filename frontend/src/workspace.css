@@ -68,7 +68,6 @@
 .wb-output > :not(.wb-output-scroll) { flex-shrink: 0; }
 .wb-output-scroll { flex: 1; margin-top: 8px; padding-right: 4px; }
 .wb-output-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 1px 0 13px; }
-.wb-output-heading > div > p { font-size: 10px; font-weight: 600; letter-spacing: .1em; color: #96a69c; }
 .wb-output-heading h1 { font-size: clamp(24px, 2.5vw, 30px); font-weight: 650; letter-spacing: -.025em; line-height: 1.45; }
 .wb-status { display: inline-flex; gap: 5px; align-items: center; white-space: nowrap; font-size: 11px; padding: 4px 8px; border: 1px solid var(--wb-border); border-radius: 6px; color: var(--muted); background: #ffffff04; }
 .wb-status.active { color: #a2e8dd; border-color: #80e1dc46; }

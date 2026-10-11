@@ -89,7 +89,7 @@ export default function DemoWorkbench({ language }: { language: DemoLanguage }) 
       </aside>
 
       <section className="wb-output wb-glass" aria-labelledby="workspace-title">
-        <header className="wb-output-heading"><div><p>{t("REMOTE SENSING ANALYSIS", "遥感分析")}</p><h1 id="workspace-title">{t("Analysis workspace", "分析工作区")}</h1></div><span className={`wb-status ${finished ? "complete" : replay.phase ? "active" : ""}`}>{finished ? <CheckCircle2 size={13} /> : <Activity size={13} />}{status}</span></header>
+        <header className="wb-output-heading"><h1 id="workspace-title">{t("Workspace", "工作区")}</h1><span className={`wb-status ${finished ? "complete" : replay.phase ? "active" : ""}`}>{finished ? <CheckCircle2 size={13} /> : <Activity size={13} />}{status}</span></header>
         <div className="wb-progress" aria-label={t("Execution progress", "执行进度")} role="progressbar" aria-valuemin={0} aria-valuemax={LAST_PHASE} aria-valuenow={replay.phase}><span style={{ width: `${replay.phase / LAST_PHASE * 100}%` }} /></div>
         {replay.phase > 0 ? <ol className="wb-event-stack" style={{ paddingTop: stackDepth * 22 }} aria-label={t("Tool activity", "工具执行记录")}>
           {visibleEvents.map((event, index) => {
